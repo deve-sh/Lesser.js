@@ -1,0 +1,11 @@
+{
+  "name": "lesser.js",
+  "version": "1.0.0",
+  "description": "A JavaScript module to get more with less.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Devesh Kumar",
+  "license": "MIT"
+}
