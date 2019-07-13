@@ -333,3 +333,25 @@ async function AJAX(type = "GET", url = "", func = (req) => {return;}, data = {}
 		throw new Error(err);	// This is going to return an error such as 404,401,400, etc. or a CORS error.
 	}
 }
+
+
+/*
+	Module Exports
+*/
+
+module.exports = {
+	get,
+	getByN,
+	getByTN,
+	getByCN,
+	getById,
+	addStyles,
+	AJAX,
+	HTML,
+	TEXT,
+	createEl,
+	appendNode,
+	toggleClass,
+	isElement,
+	loop
+}
