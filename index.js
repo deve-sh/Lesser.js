@@ -72,8 +72,9 @@ function loop(iterable = [], func = function(arg){return;}){
 		let keys = Object.keys(iterable);
 
 		for(i=0;i<keys.length;i++){
-			if(iterable.hasOwnProperty(keys[i]))
+			if(iterable.hasOwnProperty(keys[i])){
 				func(iterable[keys[i]]);
+			}
 		}
 	}
 	else{
@@ -218,6 +219,16 @@ function appendNode(parent, child){
 	else{
 		throw new Error("Invalid Arguments, expected DOM Nodes as parent and child.");
 	}
+}
+
+// Function to check if a DOM Node has a class.
+
+function hasClass(element, className = ""){
+	if(isElement(element)){
+		return element.classList.contains(className);
+	}
+	else
+		throw new Error("Invalid Argument. Expected an Element.");
 }
 
 // Function to add a className to the classList of a DOM Element.
