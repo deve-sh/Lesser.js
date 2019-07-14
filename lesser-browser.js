@@ -394,11 +394,11 @@ function deleteEl(DOMElements){
 		for(let i = 0;i<DOMElements.length; i++){
 			// Adding the event listener to each DOM Element one by one.
 
-			DOMElements[i].delete();
+			DOMElements[i].remove();
 		}
 	}
 	else if(isElement(DOMElements)){
-		DOMElements.delete();
+		DOMElements.remove();
 	}
 	else{
 		throw new Error("Invalid Argument passed as DOM Element.");
