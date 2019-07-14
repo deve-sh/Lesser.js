@@ -6,7 +6,53 @@ The idea of this library is to reduce that.
 
 ## Installation
 
-[Installation instructions coming soon.]
+### Browser
+
+To use Lesser.js in the browser, include the following code in your HTML file : 
+
+```html
+<script type='text/javascript' src='https://raw.githubusercontent.com/deve-sh/Lesser.js/master/lesser-browser-min.js' />
+
+<!-- Or -->
+
+<script type='text/javascript' src='https://raw.githubusercontent.com/deve-sh/Lesser.js/master/lesser-browser.js' />
+```
+
+The first one is the minified version of Lesser.js (**Recommended for usage!**) and has been compiled down to ES5, so it will work on basically any Browser.
+
+### Node.js
+
+To install Lesser.js on Node.js, run the following command from your command line :
+
+```bash
+npm install lesser.js
+```
+
+Require it in your application : 
+
+```js
+// CommonJS Method
+
+const lesser = require('lesser.js');
+
+// ES6 Method
+
+import * as lesser from 'lesser.js';
+
+// Or import a specific function from lesser using destructuring.
+
+import {get, getById} from 'lesser.js';
+
+```
+
+### For Development
+
+For further development, just clone the Git Repository or download the zip, and edit it like any other JavaScript project.
+
+```bash
+git clone https://github.com/deve-sh/Lesser.js.git
+cd Lesser.js
+```
 
 ## Usage
 
