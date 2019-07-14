@@ -11,11 +11,11 @@ The idea of this library is to reduce that.
 To use Lesser.js in the browser, include the following code in your HTML file : 
 
 ```html
-<script type='text/javascript' src='https://raw.githubusercontent.com/deve-sh/Lesser.js/master/lesser-browser-min.js' />
+<script type='text/javascript' src='https://raw.githubusercontent.com/deve-sh/Lesser.js/master/lesser-browser-min.js'></script>
 
 <!-- Or -->
 
-<script type='text/javascript' src='https://raw.githubusercontent.com/deve-sh/Lesser.js/master/lesser-browser.js' />
+<script type='text/javascript' src='https://raw.githubusercontent.com/deve-sh/Lesser.js/master/lesser-browser.js'></script>
 ```
 
 The first one is the minified version of Lesser.js (**Recommended for usage!**) and has been compiled down to ES5, so it will work on basically any Browser.
