@@ -1,4 +1,11 @@
-// JavaScript module to use less plain JavaScript to accomplish simple tasks.
+/*
+	Lesser.js
+
+	JavaScript module to use less plain JavaScript to accomplish simple tasks.
+	Idea is to reduce the times one has to use long strings of plain JavaScript to accomplish tasks as simple as selecting elements with tag name 'p'.
+	
+	Read the Documentation for more.
+*/
 
 /*	----------------------
 	DOM ELEMENT SELECTORS!
@@ -130,7 +137,7 @@ function HTML(DOMElements = [], html = ""){
 // Function to return or set the text of a node.
 // If one wants innerText of a DOM Node instead of the textContent, then set the innerText argument to true.
 
-function TEXT(DOMElements = [], text = "", innerText = false){
+function TEXT(DOMElements = [], innerText = false, text = ""){
 	if(text !== ""){
 		// If the user wants to set the innerHTML Of DOMElements passed as the argument.
 
@@ -270,11 +277,13 @@ function addStyles(DOMElements, styles = {}){
 // NOTE:
 // ------
 // To access the response or properties of the request in the func argument, use the req object.
-// Example : To access the response text of the request, use xhr.responseText inside the callback function.
+// The callback function's first argument is the req object.
+// Example : To access the response text of the request, use req.responseText inside the callback function.
 
-async function AJAX(type = "GET", url = "", func = (req) => {return;}, data = {}){
+async function AJAX(type = "GET", url = "", func = (req) => {return;}, data = ""){
+	// Note : Data can be of any type.
 
-	if(typeof url !== 'string' || typeof func !== 'function' || typeof type !== 'string' || typeof data !== 'object')
+	if(typeof url !== 'string' || typeof func !== 'function' || typeof type !== 'string')
 		throw new Error("Invalid Arguemnt Types.");
 
 	try{
@@ -302,6 +311,9 @@ async function AJAX(type = "GET", url = "", func = (req) => {return;}, data = {}
 				break;
 			}
 			case 'POST':{
+				if(!data)
+					throw new Error("Required some data to be sent through POST Request.");
+
 				xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
 				xhr.onload = function(){
 					req = xhr;
@@ -311,6 +323,9 @@ async function AJAX(type = "GET", url = "", func = (req) => {return;}, data = {}
 				break;
 			}
 			case 'PUT': {
+				if(!data)
+					throw new Error("Required some data to be created through PUT Request.");
+				
 				xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
 				xhr.onload = function(){
 					req = xhr;
@@ -334,6 +349,115 @@ async function AJAX(type = "GET", url = "", func = (req) => {return;}, data = {}
 	}
 }
 
+// Function to add event listeners to a set of DOM Elements.
+// The function receives the list of DOM Elements or a single DOM Element, the event and a callback function to execute once the event happens.
+// The callback's first argument is the event object by default (It is sent automatically by the browser).
+// So anyone keen to use arguments in the callback function should use so after the first argument.
+
+function onEvent(DOMElements, event = 'click', func = (event) => {}){
+	if(!DOMElements || !event || !func)
+		throw new Error("All DOM Element, Event descriptor and Callback function required as arguments.");
+
+	if(NodeList.prototype.isPrototypeOf(DOMElements) || HTMLCollection.prototype.isPrototypeOf(DOMElements)){
+		for(let i = 0;i<DOMElements.length; i++){
+			// Adding the event listener to each DOM Element one by one.
+
+			DOMElements[i].addEventListener(event, func);
+		}
+	}
+	else if(isElement(DOMElements)){
+		DOMElements.addEventListener(event, func);
+	}
+	else{
+		throw new Error("Invalid Argument passed as DOM Element.");
+	}
+}
+
+// DOM Element Deleter Function
+
+function deleteEl(DOMElements){
+	if(!DOMElements)
+		throw new Error("DOM Element or its set required as arguments.");
+
+	if(NodeList.prototype.isPrototypeOf(DOMElements) || HTMLCollection.prototype.isPrototypeOf(DOMElements)){
+		for(let i = 0;i<DOMElements.length; i++){
+			// Adding the event listener to each DOM Element one by one.
+
+			DOMElements[i].delete();
+		}
+	}
+	else if(isElement(DOMElements)){
+		DOMElements.delete();
+	}
+	else{
+		throw new Error("Invalid Argument passed as DOM Element.");
+	}
+}
+
+// Function to return a cloned DOM Element.
+
+function clone(DOMElement){
+	if(!DOMElements)
+		throw new Error("Expected DOM Element as argument.");
+
+	if(isElement(DOMElement)){
+		let clonedElement = DOMElement;
+		return DOMElement;
+	}
+	else{
+		throw new Error("Invalid DOM Element passed.");
+	}
+}
+
+
+// -----------------------------------------
+// Miscellaneous Data Structures for stuff.
+// -----------------------------------------
+
+// ES5 Stack Class
+
+function Stack(){
+	let stack = [];		// The Array that is going to be used as the stack.
+
+	function push(element){
+		return this.stack.push(element);
+	}
+
+	function pop(){
+		return this.stack.pop();
+	}
+
+	function isEmpty(){
+		return this.stack.length <= 0;
+	}
+
+	function peek(){
+		// Returns the latest element of the stack if it is not empty.
+		if(!this.isEmpty())
+			return this.stack[this.stack.length - 1]
+		else
+			return "Stack Empty.";
+	}
+
+	function print(){	
+		// Returns the entire stack.
+		if(!this.isEmpty())
+			return this.stack;
+		else
+			return "Stack Empty."
+	}
+
+	return {
+		stack,
+		push,
+		peek,
+		isEmpty,
+		pop,
+		print
+	}
+}
+
+// Linked List, Queues coming soon.
 
 /*
 	Module Exports
@@ -353,5 +477,8 @@ module.exports = {
 	appendNode,
 	toggleClass,
 	isElement,
-	loop
+	loop,
+	Stack,
+	deleteEl,
+	clone
 }
