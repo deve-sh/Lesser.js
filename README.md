@@ -20,7 +20,6 @@ Require it as a CommonJS dependency or a browser script as shown in the Installa
 You could also import it as an ES6 Dependency.
 
 ```javascript
-
 // CommonJS Module
 
 const lesser = require('lesser.js');
@@ -87,6 +86,20 @@ lesser.TEXT(DOMElements, true, "Sets the innerText of all the elements inside DO
 // To use in the browser, Just remove the lesser. from the beggining of the instructions.
 ```
 
+#### Setting Styles of the DOM
+
+The styles of a DOM Element or a list of DOM Nodes can be set in one go using the `addStyles` function.
+
+The addStyles function takes the DOM Node or a list of DOM Nodes as its first argument and an object of styles (**Note** : The object needs to be JavaScript CSS Compliant. Example : Use `className` instead of `class`.)
+
+```js
+const DOMList = get('h3');
+
+// Set all h3 Nodes' colors as blue.
+
+addStyles(DOMList, {color: 'blue'});
+```
+
 #### Looping over an Iterable
 
 To loop over an iterable element and perform a certain function over all its elements, use the `loop` function, its first argument is the iterable, and the second argument is the callback function that takes the element in the iterable as its argument and performs operations on it.
@@ -126,6 +139,10 @@ const parent = getById('parentDiv');
 appendNode(parent, element);	// The element variable will be appended to the parent.
 ```
 
+#### Deleting a DOM Node
+
+To delete a DOM Element/Node from the webpage. Use the `deleteEl` function which takes the list of DOM Nodes or a single DOM Node as its argument.
+
 #### Checking if an Element has a particular class.
 
 To check if an element has a particular class. Use the `hasClass` function. It takes the DOM Element as its first argument and the className to check.
@@ -145,3 +162,89 @@ It takes the element as its first argument and the className as the second argum
 ```js
 toggleClass(element, 'classToToggle');
 ```
+
+#### Adding Event Listeners
+
+You can also add event listeners and callbacks to a list of DOM Elements or a single Node, using the `onEvent` function.
+
+The onEvent function takes the DOM Elements' List or the DOM Node as its first argument, the event as a string as the second argument and the callback function to execute on the event as its second argument. The callback function has a default argument as the event object.
+
+```js
+const DOMList = get(`p`);		// Get all the paragraphs.
+
+onEvent(DOMList,'click', (event) => {
+	console.log(event.target.textContent);
+});		// Now every paragraph on the webpage has the event listener.
+```
+
+### Miscellaneous Tasks
+
+The following tasks are not related to DOM Operations. But nonetheless, take considerable amount of code to execute and operate.
+
+So its good to use the functions packaged with Lesser.js to perform tasks that does not require a lot of complicated code.
+
+#### Making an AJAX Call
+
+AJAX Calls are essential to front end applications. But since they are tedious to write, especially, the pre-ES6 way without using the `fetch` API.
+
+AJAX Calls can be asynchronously and effortlessly made using Lesser.js.
+
+The inbuild function **`AJAX`** can be used.
+
+**Note** : You need to configure CORS yourself on the backend if you are making requests to a seperate server than your own.
+
+The function takes the type (GET, POST, PUT, DELETE) of the request as the first argument, the URL to make the request to as the second argument, the function to execute when the request loads, and the data to send (If the request is a POST or PUT request).
+
+The callback function takes the req object as the parameter.
+
+```js
+// In a CommonJS Module.
+
+lesser.AJAX('GET','URL', (req) => {
+	console.log(req.response);
+});
+
+// POST Request example in a Browser Environment.
+
+AJAX('POST', 'URL', (req) => {
+	console.log(req.response);
+}, "Data to send through POST");
+```
+
+#### Using the Stack function
+
+Data Structures are very useful. One such useful data structure is the Stack.
+
+There is a predefined function (ES5 Class) known as `Stack` that initializes an instance of a stack.
+
+```js
+// CommonJS Implementation
+
+let newStack = new lesser.Stack();
+
+// Browser Implementation
+
+let newStack = new Stack();
+
+// Common Operations on Stack.
+
+newStack.push(2);	// Pushes 2 to the stack.
+newStack.push(5);	// Pushes 5 to the stack.
+newStack.peek();	// Returns the latest element of the stack.
+newStack.print();	// Returns the entire stack.
+newStack.pop();		// Pops the latest element of the stack.
+newStack.inEmpty();	// Returns true is stack is empty and false if otherwise.
+```
+
+## Contribution, Issues and Support
+
+Just make any change you deem necessary or add a feature that might be missing, like : 
+
+* Linked Lists
+* Queues
+
+Or any other, and open a pull request to the repo. Pull Requests will be merged to master once they are verified to be valueable to the master branch.
+
+For any issue. Just open an Issue in the repo.
+
+For Support, open an issue or [mail me](mailto:devesh2027@gmail.com).
