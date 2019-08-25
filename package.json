@@ -1,6 +1,6 @@
 {
   "name": "lesser.js",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "A JavaScript module to get more with less.",
   "main": "index.js",
   "scripts": {

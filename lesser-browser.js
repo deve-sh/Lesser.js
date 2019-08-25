@@ -307,15 +307,10 @@ async function AJAX(type = "GET", url = "", func = (req) => {return;}, data = ""
 		
 		xhr.open(type,url,true);
 
-		xhr.onload = function(){
-			req = xhr;
-			func(req);
-		};
-
 		switch(type){
 			case 'GET': {
 				xhr.onload = function(){
-					req = xhr;
+					let req = xhr;
 					func(req);
 				};
 				await xhr.send(null);
@@ -327,7 +322,7 @@ async function AJAX(type = "GET", url = "", func = (req) => {return;}, data = ""
 
 				xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
 				xhr.onload = function(){
-					req = xhr;
+					let req = xhr;
 					func(req);
 				};
 				await xhr.send(data);
@@ -339,7 +334,7 @@ async function AJAX(type = "GET", url = "", func = (req) => {return;}, data = ""
 				
 				xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
 				xhr.onload = function(){
-					req = xhr;
+					let req = xhr;
 					func(req);
 				};
 				await xhr.send(data);
@@ -351,7 +346,7 @@ async function AJAX(type = "GET", url = "", func = (req) => {return;}, data = ""
 				
 				xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
 				xhr.onload = function(){
-					req = xhr;
+					let req = xhr;
 					func(req);
 				};
 				await xhr.send(data);
