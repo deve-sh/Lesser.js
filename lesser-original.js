@@ -346,11 +346,19 @@ async function AJAX(type = "GET", url = "", func = (req) => {return;}, data = ""
 				break;
 			}
 			case 'DELETE': {
-				await xhr.send(null);
+				if(!data)
+					throw new Error("Required some data to be created through DELETE Request.");
+				
+				xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+				xhr.onload = function(){
+					req = xhr;
+					func(req);
+				};
+				await xhr.send(data);
 				break;
 			}
 			default: {
-				throw new Error("Invalid Type for an xhr.");
+				throw new Error("Invalid Type for an XHR (or) XHR Type currently not supported.");
 				break;
 			}
 		}
